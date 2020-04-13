@@ -8,7 +8,10 @@
         "php": "^7.2.5",
         "illuminate/cookie": "^7.5",
         "illuminate/session": "^7.5",
-        "laravel/lumen-framework": "^7.0"
+        "laravel/lumen-framework": "^7.0",
+        "laravel/socialite": "^4.3",
+        "socialiteproviders/manager": "^3.5",
+        "socialiteproviders/yandex": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",
@@ -22,7 +25,9 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "exclude-from-classmap": ["vendor/socialiteproviders/yandex/Provider.php"],
+        "files": ["app/Providers/YandexAbstractProvider.php"]
     },
     "autoload-dev": {
         "classmap": [

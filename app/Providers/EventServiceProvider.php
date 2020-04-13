@@ -12,8 +12,11 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        \App\Events\ExampleEvent::class => [
+/*         \App\Events\ExampleEvent::class => [
             \App\Listeners\ExampleListener::class,
+        ], */
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            'SocialiteProviders\Yandex\YandexExtendSocialite@handle',
         ],
     ];
 }

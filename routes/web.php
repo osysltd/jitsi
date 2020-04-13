@@ -70,3 +70,18 @@ $router->get('/test/user-midware', ['middleware' => 'auth', function (Request $r
     $user = Auth::user();
     return 'SQL exception expected if the user id has been resolved from session';
 }]);
+
+
+$router->get('/test/oauth-callback', function (\Illuminate\Http\Request $request) {
+    $user = Laravel\Socialite\Facades\Socialite::driver('yandex')->user();
+    Auth::login($user);
+    if (Auth::check()) {
+        return redirect()->to('/index');
+    }
+});
+
+$router->get('/test/oauth-redirect', function (\Illuminate\Http\Request $request) {
+    // Lumen providers will automatically be stateless
+    return Laravel\Socialite\Facades\Socialite::with('yandex')->stateless(false)->redirect();
+});
+
