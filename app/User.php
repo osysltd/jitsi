@@ -13,12 +13,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use Authenticatable, Authorizable;
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'oauth_id', 'login', 'nickname', 'name', 'email', 'avatar', 'birthday', 'sex', 'updated_at'
     ];
 
     /**
@@ -27,6 +34,81 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
+        'remember_token', 'password', 'token', 'refreshToken', 'expiresIn'
     ];
+
+ /**
+     * Get all of the user events.
+     */
+
+    public function events()
+    {
+        return $this->hasMany('App\Event');
+    }
+
+
+    /*
+    * Part of code has been copied from Laravel\Socialite\Two\User
+    * @path \vendor\laravel\socialite\src\Two\User.php
+    */
+
+    /**
+     * The user's access token.
+     *
+     * @var string
+     */
+    public $token;
+
+    /**
+     * The refresh token that can be exchanged for a new access token.
+     *
+     * @var string
+     */
+    public $refreshToken;
+
+    /**
+     * The number of seconds the access token is valid for.
+     *
+     * @var int
+     */
+    public $expiresIn;
+
+    /**
+     * Set the token on the user.
+     *
+     * @param  string  $token
+     * @return $this
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Set the refresh token required to obtain a new access token.
+     *
+     * @param  string  $refreshToken
+     * @return $this
+     */
+    public function setRefreshToken($refreshToken)
+    {
+        $this->refreshToken = $refreshToken;
+
+        return $this;
+    }
+
+    /**
+     * Set the number of seconds the access token is valid for.
+     *
+     * @param  int  $expiresIn
+     * @return $this
+     */
+    public function setExpiresIn($expiresIn)
+    {
+        $this->expiresIn = $expiresIn;
+
+        return $this;
+    }
 }

@@ -43,12 +43,8 @@ class AuthServiceProvider extends ServiceProvider
          *
          */
 
-        $this->app['auth']->viaRequest(
-            'web',
-            function ($request) {
-                $user = new Illuminate\Auth\GenericUser(['id' => 1, 'name' => 'User']);
-                return $user;
-            }
-        );
+        $this->app['auth']->viaRequest('web', function ($request) {
+            return Auth::user();
+        });
     }
 }

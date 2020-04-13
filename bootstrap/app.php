@@ -91,6 +91,7 @@ $app->routeMiddleware([
 
 $app->middleware([
     Illuminate\Session\Middleware\StartSession::class,
+    Illuminate\View\Middleware\ShareErrorsFromSession::class,
 ]);
 
 $app->singleton(Illuminate\Session\SessionManager::class, function () use ($app) {
@@ -101,6 +102,7 @@ $app->singleton('session.store', function () use ($app) {
     return $app->loadComponent('session', Illuminate\Session\SessionServiceProvider::class, 'session.store');
 });
 
+class_alias(Illuminate\Support\Facades\Session::class, 'Session');
 
 /*
 |--------------------------------------------------------------------------
@@ -117,11 +119,8 @@ $app->bind('Illuminate\Contracts\Cookie\QueueingFactory', 'cookie');
 $app->middleware([
     Illuminate\Cookie\Middleware\EncryptCookies::class,
     Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-    Illuminate\Session\Middleware\StartSession::class,
-    Illuminate\View\Middleware\ShareErrorsFromSession::class,
     App\Http\Middleware\VerifyCsrfToken::class,
 ]);
-
 
 /*
 |--------------------------------------------------------------------------
