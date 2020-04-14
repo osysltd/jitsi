@@ -44,7 +44,7 @@ class AuthServiceProvider extends ServiceProvider
          */
 
         $this->app['auth']->viaRequest('web', function ($request) {
-            return Auth::user();
+            return User::findOrFail(Auth::user()->id);
         });
     }
 }

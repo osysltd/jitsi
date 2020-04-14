@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout',  ['bodyclass' => 'homepage'])
 @section('content')
 
 <!-- Main Wrapper -->
@@ -10,8 +10,8 @@
             <div class="row">
                 <div id="content" class="col-12">
                     <header class="major">
-                        <h2>{{ $data['site-title'] }}</h2>
-                        <p>{{ $data['site-descr'] }}</p>
+                        <h2>{{ $data['title'] }}</h2>
+                        <p>{{ $data['descr'] }}</p>
                     </header>
 
                     <ul class="pennants">
@@ -68,7 +68,7 @@
         <div class="title"><span>{{ $data['featured-title'] }}</span></div>
         <div class="row">
 
-            <div class="col-6 col-12-narrower">
+            <div class="col-4 col-12-narrower">
                 <header>
                     <h2>{{ $data['featured-header'] }}</h2>
                     <p>{{ $data['featured-comment'] }}</p>
@@ -76,24 +76,21 @@
                 <p>{{ $data['featured-text'] }}</p>
             </div>
 
-            <div class="col-6 col-12-narrower">
-                <ul class="profiles three">
+            <div class="col-8 col-12-narrower">
+                <ul class="profiles first">
 
 
 
                     @foreach($users as $user)
                     <li>
                         <div class="row">
-                            <div class="col-4 col-12-narrower">
+                            <div class="col-2 col-12-narrower">
                                 <a href="#" class="image fit"><img src="{{ $user->avatar }}" alt="" /></a>
                             </div>
-                            <div class="col-8 col-12-narrower">
+                            <div class="col-10 col-12-narrower">
                                 <h3>{{ $user->name }}</h3>
-                                @if ($user->descr)
-                                <p>{{ $user->descr }}</p>
-                                @else
-                                <p>No description provided yet, very sorry for that</p>
-                                @endif
+                                <p>{{ $user->text }}</p>
+
                             </div>
                         </div>
                     </li>

@@ -9,13 +9,13 @@
     <link rel="canonical" href="{{ config('app.url') }}" />
     <meta name="copyright" content="Registered, Delegated, Verified" />
     <meta name="robots" content="index, follow" />
-    <meta name="keywords" content="{{ $data['site-kwords'] }}" />
-    <meta name="description" content="{{ $data['site-descr'] }}" />
+    <meta name="keywords" content="{{ $data['kwords'] }}" />
+    <meta name="description" content="{{ $data['descr'] }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/assets/css/main.css" />
-    <title>{{ config('app.name') }} - {{ $data['site-title'] }}</title>
+    <title>{{ config('app.name') }} - {{ $data['title'] }}</title>
 </head>
-<body class="homepage is-preload">
+<body class="{{ isset($bodyclass) ? $bodyclass : 'no-sidebar' }} is-preload">
     <div id="page-wrapper">
 
         <!-- Header Wrapper -->
@@ -29,6 +29,7 @@
                         <img itemprop="image" alt="{{ config('app.name') }}" src="/assets/images/logo.svg" width="80" style="margin-top: 0.5em;">
                     </a>
                 </h1>
+
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
@@ -43,25 +44,16 @@
                                 @endforeach
                             </ul>
                         </li>
-
                         @if (Auth::check())
                         <li><a title="{{ $data['btn-create-descr'] }}" href="/site/create">{{ $data['btn-create'] }}</a></li>
                         <li><a title="{{ Auth::user()->name }}" href="/site/logout">{{ $data['btn-logout'] }}</a></li>
                         @else
-                        <li><a title="{{ $data['btn-login-descr'] }}" href="/site/auth">{{ $data['btn-login'] }}</a></li>
-
+                        <li><a title="{{ $data['btn-login-descr'] }}" href="/site/login">{{ $data['btn-login'] }}</a></li>
                         @endif
                     </ul>
                 </nav>
-
             </div>
-
         </div>
-
-
-
-
-
 
         @yield('content')
 
@@ -70,9 +62,7 @@
 
             <!-- Footer -->
             <div id="footer" class="container">
-
                 <div class="title"><span>{{ $data['footer-title'] }}</span></div>
-
                 <div class="row">
 
                     <!-- Form -->
@@ -134,17 +124,12 @@
                             </li>
                         </ul>
                     </section>
-
                 </div>
-
             </div>
-
         </div>
 
         <!-- Copyright -->
         <div id="copyright">&copy; {{ config('app.name') . ' '. date('Y')}}</div>
-
-
     </div>
 
     <!-- Scripts -->

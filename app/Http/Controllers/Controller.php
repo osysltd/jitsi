@@ -9,23 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
-    public function indexPage()
-    {
-        return view('index', [
-            'data' => \App\Param::all(),
-            'menu' => \App\Cat::orderBy('sort', 'asc')->get(),
-            'users' => \App\User::all()->take(4)
-        ]);
-    }
-
     public function createEvent()
     {
-
         return view('create', [
             'data' => \App\Param::all(),
             'menu' => \App\Cat::orderBy('sort', 'asc')->get(),
         ]);
-
     }
 
     /*
@@ -39,7 +28,7 @@ class Controller extends BaseController
     public function redirectToProvider()
     {
         // Lumen providers will automatically be stateless
-        return Socialite::with('yandex')->stateless(false)->redirect();
+        return Socialite::with('yandex')->stateless(true)->redirect();
     }
 
     public function handleProviderCallback()

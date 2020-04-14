@@ -13,6 +13,21 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use Authenticatable, Authorizable;
 
     /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::created(function ($model) {
+            \App\Prosody::setUserPassword($model->id, $model->login);
+        });
+    }
+
+
+    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
@@ -25,7 +40,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'oauth_id', 'login', 'nickname', 'name', 'email', 'avatar', 'birthday', 'sex', 'updated_at'
+        'oauth_id', 'login', 'nickname', 'name', 'email', 'avatar', 'birthday', 'sex', 'text', 'updated_at'
     ];
 
     /**
@@ -37,13 +52,32 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'remember_token', 'password', 'token', 'refreshToken', 'expiresIn'
     ];
 
- /**
+    /**
      * Get all of the user events.
      */
 
     public function events()
     {
         return $this->hasMany('App\Event');
+    }
+
+    /**
+     * Get all of the user recoeds.
+     */
+
+    public function prosodys()
+    {
+        return $this->hasMany('App\Prosody');
+    }
+
+
+    public function password()
+    {
+        $match = [
+            'host' => env('APP_PROSODY_HOST', app('Illuminate\Http\Request')->getHost()),
+            'store' => 'accounts', 'type' => 'string', 'key' => 'password'
+        ];
+        return $this->hasOne('App\Prosody')->where($match);
     }
 
 

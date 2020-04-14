@@ -103,6 +103,7 @@ $app->singleton('session.store', function () use ($app) {
 });
 
 class_alias(Illuminate\Support\Facades\Session::class, 'Session');
+class_alias(Illuminate\Support\Facades\Request::class, 'Request');
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +122,8 @@ $app->middleware([
     Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
     App\Http\Middleware\VerifyCsrfToken::class,
 ]);
+
+class_alias(Illuminate\Support\Facades\Cookie::class, 'Cookie');
 
 /*
 |--------------------------------------------------------------------------

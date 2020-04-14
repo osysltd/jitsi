@@ -9,8 +9,8 @@
 
         <!-- Main Heading -->
         <div class="title-heading">
-            <h2>Left Sidebar</h2>
-            <p>Maecenas luctus lectus at sapien</p>
+            <h2> {{ Auth::user()->name }}</h2>
+            <p>{{ $data['p-create-title'] }}</p>
         </div>
 
         <!-- Main Content -->
@@ -21,38 +21,30 @@
                 <div id="sidebar" class="col-4 col-12-narrower">
                     <section class="section-padding">
                         <header>
-                            <h2>Aenean metus iaculis</h2>
+                            <h2>{{ $data['p-create-profile'] }}</h2>
                         </header>
-                        <p>Praesent semper mod quis eget. Etiam eu ante risus. Aliquam erat volutpat. Aliquam lectus sit amet pulvinar. Pellentesque viverra vulputate enim.</p>
-                        <ul class="links">
-                            <li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-                            <li><a href="#">Ornare in hendrerit in lectus</a></li>
-                            <li><a href="#">Consequat etiam lorem phasellus</a></li>
-                            <li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-                        </ul>
+                        <p style="margin-bottom: 0.2em;">{{ $data['profile-login'] }} {{ Auth::user()->login }}</p>
+                        <p style="margin-bottom: 0.2em;">{{ $data['profile-pwd'] }} {{ Auth::user()->password->value }}</p>
+                        <p style="margin-bottom: 0.2em;">{{ $data['profile-pwd-upd'] }} {{ Auth::user()->password->updated_at }}</p>
                         <footer>
-                            <a href="#" class="button small alt2">Learn More</a>
+                            <a href="/site/changepw" class="button small alt2">{{ $data['profile-changepw'] }}</a>
                         </footer>
                     </section>
-
-                    <section>
-                        <header>
-                            <h2>Integer gravida</h2>
-                        </header>
-                        <ul class="links">
-                            <li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-                            <li><a href="#">Ornare in hendrerit in lectus</a></li>
-                            <li><a href="#">Semper mod quis eget mi dolore</a></li>
-                            <li><a href="#">Quam turpis feugiat sit dolor</a></li>
-                            <li><a href="#">Amet ornare in hendrerit in lectus</a></li>
-                            <li><a href="#">Consequat etiam lorem phasellus</a></li>
-                            <li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-                        </ul>
-                        <footer>
-                            <a href="#" class="button small alt2">Learn More</a>
-                        </footer>
+                    <section class="section-padding">
+                        <form method="post" action="/site/savedetails">
+                            <input type="hidden" name="_token" value="{{ Session::token() }}" />
+                            <div class="row gtr-50 gtr-uniform">
+                                <div class="col-12">
+                                    <textarea maxlength="255" name="text" id="text" placeholder="{{ $data['profile-about'] }}">{{ Auth::user()->text }}</textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="actions">
+                                        <button type="submit" class="button alt">{{ $data['profile-save'] }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </section>
-
                 </div>
 
                 <!-- Content -->
@@ -72,9 +64,7 @@
             </div>
         </div>
         <!-- Main Content -->
-
     </div>
     <!-- Main -->
-
 </div>
 @endsection

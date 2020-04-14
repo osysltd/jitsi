@@ -3,9 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class Prosody extends Model
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'prosody';
+
     /**
      * Indicates if the model should be timestamped.
      *
@@ -20,64 +29,46 @@ class Prosody extends Model
      */
     protected $primaryKey = 'sort_id';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['user_id', 'user', 'host', 'store', 'type', 'key', 'value'];
 
     /**
      * Sets the user password.
      *
      * @return void
      */
+    public static function setUserPassword($id, $login)
+    {
+        if ((bool) $id && (bool) $login) {
+            $match = [
+                'user_id' => $id, 'user' => $login,
+                'host' => env('APP_PROSODY_HOST', app('Illuminate\Http\Request')->getHost()),
+                'store' => 'accounts', 'type' => 'string', 'key' => 'password'
+            ];
+            $model = self::updateOrCreate($match, ['value' => self::generatePassword()]);
+        } else {
+            throw new ModelNotFoundException('User setUserPassword <' . $login . '> id: ' . $id);
+        }
+    }
 
-    public static function setUserPassword()
-    { }
-
-    /*
-function provider.set_password(username, password)
-	log("debug", "set_password for username '%s'", username);
-	local account = accounts:get(username);
-	if account then
-		account.salt = generate_uuid();
-		account.iteration_count = max(account.iteration_count or 0, default_iteration_count);
-		local valid, stored_key, server_key = get_auth_db(password, account.salt, account.iteration_count);
-		local stored_key_hex = to_hex(stored_key);
-		local server_key_hex = to_hex(server_key);
-
-		account.stored_key = stored_key_hex
-		account.server_key = server_key_hex
-
-		account.password = nil;
-		return accounts:set(username, account);
-	end
-	return nil, "Account not available.";
-end
-
-
-local function generate()
-	-- generate RFC 4122 complaint UUIDs (version 4 - random)
-	return get_nibbles(8).."-"..get_nibbles(4).."-4"..get_nibbles(3).."-"..(get_twobits())..get_nibbles(3).."-"..get_nibbles(12);
-end
-
-local hex = require"util.hex";
-local to_hex, from_hex = hex.to, hex.from;
-
-local char_to_hex = {};
-local hex_to_char = {};
-
-do
-	local char, hex;
-	for i = 0,255 do
-		char, hex = s_char(i), s_format("%02x", i);
-		char_to_hex[char] = hex;
-		hex_to_char[hex] = char;
-	end
-end
-
-local function to(s)
-	return (s_gsub(s, ".", char_to_hex));
-end
-
-local function from(s)
-	return (s_gsub(s_lower(s), "%X*(%x%x)%X*", hex_to_char));
-end
-
-*/
+    /**
+     * Generates the user password.
+     *
+     * @return string
+     */
+    private static function generatePassword()
+    {
+        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ123456789";
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 10; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
+    }
 }
