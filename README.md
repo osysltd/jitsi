@@ -1,24 +1,102 @@
-# Lumen PHP Framework
+# Lumen Jitsi Meet
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+[Laravel Lumen](https://github.com/laravel/lumen) is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+[Jitsi Meet](https://github.com/jitsi/jitsi-meet/) is an open-source (Apache) WebRTC JavaScript application that uses [Jitsi Videobridge](https://jitsi.org/videobridge) to provide high quality, [secure](#security) and scalable video conferences.
 
-## Official Documentation
+## Installation process
 
+### Prosody
+```sh
+sudo echo deb http://packages.prosody.im/debian $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/jitsi-stable.list
+wget https://prosody.im/files/prosody-debian-packages.key -O- | sudo apt-key add -
+sudo apt update
+sudo apt install -y prosody
+prosodyctl about
+```
+
+### Jitsi Meet
+```sh
+sudo echo 'deb https://download.jitsi.org stable/' >> /etc/apt/sources.list.d/jitsi-stable.list
+wget -qO -  https://download.jitsi.org/jitsi-key.gpg.key | apt-key add -
+sudo apt update
+sudo apt install -y jitsi-meet lua-dbi-mysql mercurial mc mysql-client-core-5.7
+```
+
+### Optional
+#### Assign permissions
+```sh
+chown ubuntu:ubuntu -R /etc/prosody/conf.avail/ /etc/jitsi/meet/ /etc/nginx/sites-available/ 
+chown ubuntu:ubuntu /usr/lib/prosody/modules/
+```
+
+#### Prepare database
+```sh
+mysql --host=<host> --user=<user> --password=<password>
+SHOW DATABASES;
+CREATE DATABASE <DB>;
+USE <DB>;
+SHOW TABLES;
+```
+
+### Location of configuration files
+```
+/etc/prosody/conf.avail/
+/etc/jitsi/meet/
+/etc/nginx/sites-available/
+/usr/lib/prosody/modules/
+```
+
+### Cleanup process
+```sh
+rm -rf /var/www/html/ /etc/nginx/ /etc/prosody/ /var/lib/prosody /usr/lib/prosody/ /usr/share/jitsi-meet/
+apt remove -y --purge prosody jitsi-meet && apt autoremove -y --purge
+```
+
+### Network configuration
+* 80/tcp - frontend
+* 443/tcp - frontend
+* 4443/tcp - videobridge
+* 10000/udp - videobridge
+* 5269/tcp - XMPP federation
+* 5222/tcp - XMPP
+* 4446/tcp/udp - Stun
+
+### Install SSL certificate
+```sh
+/usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh
+```
+
+### Jitsi Meet configuration
+Following the guide for [Secure Domain](https://github.com/jitsi/jicofo#secure-domain)
+```sh
+vim /etc/jitsi/meet/<host>-config.js
+```
+```javascript
+anonymousdomain: 'guest.<host>',
+enableUserRolesBasedOnToken: true,
+defaultLanguage: 'ru'
+stunServers: []
+enableWelcomePage: false,
+```
+```sh
+vim /etc/jitsi/jicofo/sip-communicator.properties
+org.jitsi.jicofo.auth.URL=XMPP:<host>
+```
+
+### Prosody configuration
+```sh
+vim /etc/prosody/conf.avail/<host>.cfg.lua
+```
+
+#### SQL backend Jitsi Meet users
+```sh
+sed -n 's/^ *JICOFO_AUTH_PASSWORD= *//p' /etc/jitsi/jicofo/config && prosodyctl register focus auth.<host>
+sed -n 's/^ *JVB_SECRET= *//p' /etc/jitsi/videobridge/config && prosodyctl register jvb auth.<host>
+```
+
+## Lumen Installation
 Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
 
-## Contributing
-
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
 ## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The project is not for distribution and commercial use.
