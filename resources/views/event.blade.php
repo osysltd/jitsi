@@ -45,7 +45,7 @@
                             <input type="hidden" name="_token" value="{{ Session::token() }}" />
                             <div class="row gtr-50 gtr-uniform">
                                 <div class="col-12">
-                                    <textarea maxlength="255" name="text" id="text" placeholder="{{ $data['profile-about'] }}" required>{{ Auth::user()->text }}</textarea>
+                                    <textarea maxlength="255" name="text" id="text" style="height: 5em;" placeholder="{{ $data['profile-about'] }}" required>{{ Auth::user()->text }}</textarea>
                                 </div>
                                 <div class="col-12">
                                     <div class="actions">
@@ -78,7 +78,7 @@
                                 <input type="date" name="end" id="end" class="date" placeholder="{{ $data['event-end'] }}" required />
                             </div>
                             <div class="col-12">
-                                <textarea maxlength="1500" name="descr" id="descr" placeholder="{{ $data['event-descr'] }}" required></textarea>
+                                <textarea maxlength="1500" name="descr" id="descr" style="height: 20em;" placeholder="{{ $data['event-descr'] }}" required ></textarea>
                             </div>
                             <div class="col-12">
                                 <div class="actions">
