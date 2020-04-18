@@ -7,36 +7,77 @@
 | Application Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
 */
 
 use Illuminate\Http\Request;
-
 
 $router->get('/', function () use ($router) {
     return view('index', [
         'data' => \App\Param::all(),
         'menu' => \App\Cat::orderBy('sort', 'asc')->get(),
-        'users' => \App\User::all()->take(4)
+        'users' => \App\User::where('fav', 1)->orderBy('created_at', 'asc')->get()
     ]);
 });
 
-$router->get('/site/create', ['middleware' => 'auth', 'uses' => 'Controller@createEvent']);
-$router->post('/site/savedetails',  ['middleware' => 'auth', function (Request $request) {
-    try {
-        $this->validate($request, ['text' => 'required|max:255']);
-        Auth::user()->update(['text' => $request->text]);
-    } catch (\Illuminate\Validation\ValidationException $th) { }
-    return redirect()->to('/site/create');
-}]);
-$router->get('/site/changepw', ['middleware' => 'auth', function () use ($router) {
-    \App\Prosody::setUserPassword(Auth::user()->id, Auth::user()->login);
-    return redirect()->to('/site/create');
+/**
+ * Profile and Events
+ */
+
+// GET: List events for Calendar
+$router->get('/site/list', 'Controller@listEvents');
+
+// GET: Event information
+$router->get('/site/event/{id}',  function ($id) use ($router) {
+    $match = ['session' => Session::getId(), 'event_id' => $id];
+    return view('view', [
+        'data' => \App\Param::all(),
+        'menu' => \App\Cat::orderBy('sort', 'asc')->get(),
+        'event' => \App\Event::findOrFail($id),
+        'tran' => \App\Tran::where($match)->first(),
+    ]);
+});
+
+// GET: Event creation and Profile update
+$router->get('/site/event', ['middleware' => 'auth', function () use ($router) {
+    return view('event', [
+        'data' => \App\Param::all(),
+        'menu' => \App\Cat::orderBy('sort', 'asc')->get(),
+    ]);
 }]);
 
+// POST: Event creation
+$router->post('/site/event', ['middleware' => 'auth', 'uses' => 'Controller@createEvent']);
+
+// POST: Profile information update
+$router->post('/site/profile',  ['middleware' => 'auth', function (Request $request) {
+    try {
+        $this->validate($request, ['text' => 'required|string|max:255']);
+        Auth::user()->update(['text' => $request->text]);
+    } catch (\Illuminate\Validation\ValidationException $th) {
+        Session::flash('message', $th->getMessage());
+    }
+    return redirect()->to('/site/event');
+}]);
+
+// GET: Profile new password generate
+$router->get('/site/password', ['middleware' => 'auth', function () use ($router) {
+    \App\Prosody::setUserPassword(Auth::user()->id);
+    return redirect()->to('/site/event');
+}]);
+
+/**
+ * Payment
+ * POST: Signup for Event
+ * GET: Signup for free event
+ * POST: Payment callback
+ */
+$router->post('/site/signup/{id}',  'HelperController@payCreate');
+$router->get('/site/signup/{id}',  'Controller@eventSignup');
+$router->get('/site/paycallback/{id}/{hash}',  'HelperController@payCallback');
+
+/**
+ * Authentication routes
+ */
 $router->get('/site/login', 'Controller@redirectToProvider');
 $router->get('/site/authcallback', 'Controller@handleProviderCallback');
 $router->get('/site/logout', function () use ($router) {
@@ -44,5 +85,8 @@ $router->get('/site/logout', function () use ($router) {
     return redirect()->to('/');
 });
 
+/**
+ * Service routes
+ */
 $router->get('/robots.txt', 'HelperController@createRobots');
 $router->get('/sitemap.xml', 'HelperController@createSitemap');

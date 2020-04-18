@@ -6,18 +6,36 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    public function users()
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id', 'title', 'url', 'price', 'ywallet', 'start', 'end', 'descr'
+    ];
+
+    public function user()
     {
         return $this->belongsTo('App\User');
     }
 
-    public function cats()
+    public function cat()
     {
         return $this->belongsTo('App\Cat');
     }
 
-    public function trans()
+    public function tran()
     {
-        return $this->belongsToMany('App\Tran');
+        return $this->hasMany('App\Tran');
+    }
+
+    public function getPasswordAttribute()
+    {
+        $match = [
+            'host' => 'conference.' . env('PROSODY_HOST', app('Illuminate\Http\Request')->getHost()),
+            'store' => 'muc_management', 'type' => 'string', 'key' => 'password'
+        ];
+        return \App\Prosody::where($match)->firstOrFail()->value;
     }
 }

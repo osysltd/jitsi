@@ -21,6 +21,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         parent::boot();
 
+        // Create Prosody user
         self::created(function ($model) {
             \App\Prosody::setUserPassword($model->id, $model->login);
         });
@@ -74,7 +75,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function password()
     {
         $match = [
-            'host' => env('APP_PROSODY_HOST', app('Illuminate\Http\Request')->getHost()),
+            'host' => env('PROSODY_HOST', app('Illuminate\Http\Request')->getHost()),
             'store' => 'accounts', 'type' => 'string', 'key' => 'password'
         ];
         return $this->hasOne('App\Prosody')->where($match);

@@ -13,6 +13,15 @@
     <meta name="description" content="{{ $data['descr'] }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/assets/css/main.css" />
+    <!-- Calendar -->
+    <link rel='stylesheet' href='/assets/calendar/core/main.min.css' />
+    <link rel='stylesheet' href='/assets/calendar/daygrid/main.min.css' />
+    <link rel='stylesheet' href='/assets/calendar/timegrid/main.min.css' />
+    <link rel='stylesheet' href='/assets/calendar/list/main.min.css' />
+    <link rel="stylesheet" href="/assets/calendar/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" href="/assets/calendar/flatpickr/ie.css">
+    <link rel="stylesheet" href="/assets/calendar/popper.js/popper.css">
+
     <title>{{ config('app.name') }} - {{ $data['title'] }}</title>
 </head>
 <body class="{{ isset($bodyclass) ? $bodyclass : 'no-sidebar' }} is-preload">
@@ -33,19 +42,8 @@
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
-                        <li>
-                            <a href="#">{{ $data['btn-cat'] }}</a>
-                            <ul>
-                                @foreach ($menu as $adata)
-                                <li>
-                                    <a title="{{ $adata['descr'] }}" href="{{ $adata['url'] }}">{{ $adata['title'] }}</a>
-                                    <!-- <ul><li><a href="todo"></a></li></ul>-->
-                                </li>
-                                @endforeach
-                            </ul>
-                        </li>
                         @if (Auth::check())
-                        <li><a title="{{ $data['btn-create-descr'] }}" href="/site/create">{{ $data['btn-create'] }}</a></li>
+                        <li><a title="{{ $data['btn-create-descr'] }}" href="/site/event">{{ $data['btn-create'] }}</a></li>
                         <li><a title="{{ Auth::user()->name }}" href="/site/logout">{{ $data['btn-logout'] }}</a></li>
                         @else
                         <li><a title="{{ $data['btn-login-descr'] }}" href="/site/login">{{ $data['btn-login'] }}</a></li>
@@ -62,71 +60,39 @@
 
             <!-- Footer -->
             <div id="footer" class="container">
-                <div class="title"><span>{{ $data['footer-title'] }}</span></div>
+
+                <div class="title"><span>{{$data['footer-title']}}</span></div>
+
                 <div class="row">
 
                     <!-- Form -->
-                    <section class="col-8 col-12-narrower">
-                        <header>
-                            <h2>{{ $data['footer-header'] }}</h2>
-                        </header>
-                        <form method="post" action="#">
-                            <div class="row gtr-50 gtr-uniform">
-                                <div class="col-6 col-12-narrower">
-                                    <input type="text" name="name" id="name" placeholder="Name" />
-                                </div>
-                                <div class="col-6 col-12-narrower">
-                                    <input type="text" name="email" id="email" placeholder="Email" />
-                                </div>
-                                <div class="col-12">
-                                    <input type="text" name="subject" id="subject" placeholder="Subject" />
-                                </div>
-                                <div class="col-12">
-                                    <textarea name="message" id="message" placeholder="Message"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <ul class="actions">
-                                        <li><a href="#" class="button alt2">Send Message</a></li>
-                                        <li><a href="#" class="button alt">Clear Form</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </form>
+                    <section class="col-9 col-12-narrower">
+                        <!-- Calendar -->
+                        <div id='calendar'></div>
                     </section>
 
                     <!-- Other -->
-                    <section class="col-4 col-12-narrower">
+                    <section class="col-3 col-12-narrower">
                         <header>
-                            <h2>Adipiscing rhoncus</h2>
+                            <h2>{{$data['footer-contact']}}</h2>
                         </header>
                         <ul class="icons">
-                            <li class="icon brands fa-twitter">
-                                <a href="http://twitter.com/n33co">@untitled-corp</a>
-                            </li>
-                            <li class="icon brands fa-facebook-f">
-                                <a href="#">facebook.com/untitled-corp</a>
-                            </li>
-                            <li class="icon brands fa-linkedin-in">
-                                <a href="#">linkedin.com/untitled-corp</a>
-                            </li>
                             <li class="icon solid fa-envelope">
-                                <a href="#">info@untitled.tld</a>
+                                <a href="mailto:{{$data['footer-email']}}">{{$data['footer-email']}}</a>
                             </li>
                             <li class="icon solid fa-phone">
-                                <span>(000) 000-0000</span>
-                            </li>
-                            <li class="icon solid fa-home">
-                                <span>
-                                    1234 Fictional Road #789<br />
-                                    Nashville, TN 00000<br />
-                                    United States
-                                </span>
+                                <span>{{$data['footer-phone']}}</span>
                             </li>
                         </ul>
+                        <p style='padding-top: inherit;'>{!! $data['footer-text'] !!}
                     </section>
+
                 </div>
+
             </div>
+
         </div>
+
 
         <!-- Copyright -->
         <div id="copyright">&copy; {{ config('app.name') . ' '. date('Y')}}</div>
@@ -139,6 +105,56 @@
     <script src="/assets/js/breakpoints.min.js"></script>
     <script src="/assets/js/util.js"></script>
     <script src="/assets/js/main.js"></script>
-
+    <!-- Calendar -->
+    <script src='/assets/calendar/core/main.js'></script>
+    <script src='/assets/calendar/core/locales/ru.js'></script>
+    <script src='/assets/calendar/interaction/main.min.js'></script>
+    <script src='/assets/calendar/daygrid/main.min.js'></script>
+    <script src='/assets/calendar/timegrid/main.min.js'></script>
+    <script src='/assets/calendar/list/main.min.js'></script>
+    <script src='/assets/calendar/popper.js/popper.min.js'></script>
+    <script src='/assets/calendar/tooltip.js/tooltip.min.js'></script>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var SITEURL = "{{url('/') . '/site/list'}}";
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': "{{ Session::token() }}"
+            }
+        });
+        var initialLocaleCode = 'ru';
+
+        var localeSelectorEl = document.getElementById('locale-selector');
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['interaction', 'dayGrid', 'timeGrid', 'list']
+            , header: {
+                left: 'prev,next today'
+                , center: 'title'
+                , right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            }
+            , locale: initialLocaleCode
+            , buttonIcons: false
+            , weekNumbers: false
+            , navLinks: true
+            , editable: false
+            , eventLimit: true
+            , events: SITEURL
+            , eventRender: function(info) {
+                var tooltip = new Tooltip(info.el, {
+                    title: info.event.extendedProps.description
+                    , placement: 'top'
+                    , trigger: 'hover'
+                    , container: 'body'
+                });
+            }
+        , });
+
+        calendar.render();
+
+    });
+
+</script>
 </html>

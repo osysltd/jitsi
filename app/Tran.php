@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tran extends Model
 {
-    public function events()
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['event_id', 'session', 'to', 'amount'];
+
+    public function event()
     {
-        return $this->belongsToMany('App\Event');
+        return $this->belongsTo('App\Event');
     }
 }
