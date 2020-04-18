@@ -25,8 +25,8 @@ sudo apt install -y jitsi-meet lua-dbi-mysql mercurial mc mysql-client-core-5.7
 ### Cleanup process
 Just in case you may want to reinstall everything from scratch.
 ```sh
-sudo apt remove -y --purge jitsi-meet jitsi-meet-prosody jitsi-videobridge* jicofo jitsi-meet-web jitsi-meet-web-config
-sudo apt remove -y --purge prosody nginx
+sudo apt remove -y --purge nginx* jitsi-meet jitsi-meet-prosody jitsi-videobridge* jicofo jitsi-meet-web jitsi-meet-web-config
+sudo apt remove -y --purge prosody
 sudo apt autoremove -y --purge
 rm -rf /var/www/html/ /etc/nginx/ /etc/prosody/ /var/lib/prosody/ /usr/lib/prosody/ /usr/share/jitsi-meet/
 ```
