@@ -4,7 +4,7 @@
 
 [Jitsi Meet](https://github.com/jitsi/jitsi-meet/) is an open-source (Apache) WebRTC JavaScript application that uses [Jitsi Videobridge](https://jitsi.org/videobridge) to provide high quality, [secure](#security) and scalable video conferences.
 
-## Installation process
+## Installation
 
 ### Prosody
 ```sh
@@ -93,6 +93,10 @@ vim /etc/prosody/conf.avail/<host>.cfg.lua
 ```sh
 sed -n 's/^ *JICOFO_AUTH_PASSWORD= *//p' /etc/jitsi/jicofo/config && prosodyctl register focus auth.<host>
 sed -n 's/^ *JVB_SECRET= *//p' /etc/jitsi/videobridge/config && prosodyctl register jvb auth.<host>
+```
+### Restart all services
+```sh
+/etc/init.d/prosody restart && /etc/init.d/jitsi-videobridge2 restart && /etc/init.d/jicofo restart  && /etc/init.d/nginx restart && tail -f -n0 /var/log/prosody/prosody.log
 ```
 
 ## Lumen Installation
