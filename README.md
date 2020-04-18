@@ -116,13 +116,13 @@ sudo apt install -y php-fpm php-mysql php-mbstring php-xml composer
 Create [Personal Access Token](https://github.com/settings/tokens)
 ```sh
 sudo git clone https://github.com/osysltd/jitsi/ /var/www/jitsi/
-sudo chown -R ubuntu:ubuntu /var/www/jitsi/
-cp /var/www/jitsi/.env.example /var/www/jitsi/.env
-cd /var/www/jitsi/
-composer install
-composer dump-autoload --optimize
 sudo chown -R ubuntu:www-data /var/www/jitsi/
 sudo chmod -R 2775 /var/www/jitsi/
+git config credential.helper store
+git pull origin master
+cp /var/www/jitsi/.env.example /var/www/jitsi/.env
+composer install
+composer dump-autoload --optimize
 ```
 
 ### Configuration .env
