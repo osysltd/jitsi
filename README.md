@@ -102,15 +102,21 @@ sed -n 's/^ *JVB_SECRET= *//p' /etc/jitsi/videobridge/config && prosodyctl regis
 ## Lumen Installation
 Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
 
+### Install dependencies
+```sh
+sudo apt install -y php-fpm php-mysql php-mbstring php-xml composer 
+```
+
 ### App deployment
 Create [Personal Access Token](https://github.com/settings/tokens)
 ```sh
 cd /usr/share/nginx/html/
 sudo git clone https://github.com/osysltd/jitsi/
 sudo chown -R ubuntu:ubuntu jitsi/
-
+cp jitsi/.env.example jitsi/.env
+composer install
+composer dump-autoload --optimize
 ```
-
 
 ### Configuration .env
 ```php
