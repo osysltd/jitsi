@@ -94,8 +94,8 @@ sudo vim /etc/prosody/conf.avail/<host>.cfg.lua
 
 #### SQL backend Jitsi Meet users
 ```sh
-sudo sed -n 's/^ *JICOFO_AUTH_PASSWORD= *//p' /etc/jitsi/jicofo/config && prosodyctl register focus auth.<host>
-sudo sed -n 's/^ *JVB_SECRET= *//p' /etc/jitsi/videobridge/config && prosodyctl register jvb auth.<host>
+sudo sed -n 's/^ *JICOFO_AUTH_PASSWORD= *//p' /etc/jitsi/jicofo/config && sudo prosodyctl register focus auth.<host>
+sudo sed -n 's/^ *JVB_SECRET= *//p' /etc/jitsi/videobridge/config && sudo prosodyctl register jvb auth.<host>
 ```
 
 ### Restart all services
