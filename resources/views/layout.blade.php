@@ -83,7 +83,7 @@
                                 <span>{{$data['footer-phone']}}</span>
                             </li>
                         </ul>
-                        <p style='padding-top: inherit;'>{!! $data['footer-text'] !!}
+                        <p style='padding-top: inherit; font-size: smaller;'>{!! $data['footer-text'] !!}
                     </section>
                 </div>
             </div>
