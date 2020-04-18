@@ -102,5 +102,19 @@ sed -n 's/^ *JVB_SECRET= *//p' /etc/jitsi/videobridge/config && prosodyctl regis
 ## Lumen Installation
 Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
 
+### Configuration .env
+```php
+APP_DEBUG=false
+APP_TIMEZONE=Europe/Moscow
+
+PROSODY_HOST=<host>
+SESSION_SECURE_COOKIE=true
+SESSION_LIFETIME=240
+
+YANDEX_KEY=<yandex_key>
+YANDEX_SECRET=<yandex_secret>
+YANDEX_REDIRECT_URI=<yandex_redirect_uri>
+```
+
 ## License
 The project is not for distribution and commercial use.
