@@ -99,7 +99,7 @@ sed -n 's/^ *JVB_SECRET= *//p' /etc/jitsi/videobridge/config && prosodyctl regis
 ```
 ### Restart all services
 ```sh
-/etc/init.d/prosody restart && /etc/init.d/jitsi-videobridge2 restart && /etc/init.d/jicofo restart  && /etc/init.d/nginx restart && tail -f -n0 /var/log/prosody/prosody.log
+sudo /etc/init.d/prosody restart && sudo /etc/init.d/jitsi-videobridge2 restart && sudo /etc/init.d/jicofo restart && sudo /etc/init.d/nginx restart && sudo tail -f -n0 /var/log/prosody/prosody.log
 ```
 
 ## Lumen Installation
