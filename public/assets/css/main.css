@@ -5,10 +5,7 @@
 #calendar {
     margin: 40px auto;
     padding: 0 10px;
-  }
-
-
-
+}
 
 /* Main */
 html, body, div, span, applet, object,
@@ -2514,7 +2511,7 @@ input, select, textarea {
 		position: relative;
 		text-align: center;
 		color: #a1a6ac;
-		padding: 5em 0em 7em 0em;
+		padding: 1.5em 0em 1em 0em;
 	}
 
 		#copyright span {

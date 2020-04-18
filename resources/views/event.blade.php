@@ -29,8 +29,8 @@
                         <header>
                             <h2>{{ $data['p-create-profile'] }}</h2>
                         </header>
-                        <p style="margin-bottom: 0.2em;">{{ $data['profile-login'] }} {{ Auth::user()->login }}</p>
-                        <p style="margin-bottom: 0.2em;">{{ $data['profile-pwd'] }} {{ Auth::user()->password->value }}</p>
+                        <p style="margin-bottom: 0.2em;">{{ $data['profile-login'] }}: {{ Auth::user()->login }}</p>
+                        <p style="margin-bottom: 0.2em;">{{ $data['profile-pwd'] }}: {{ Auth::user()->password->value }}</p>
                         <p style="margin-bottom: 0.2em;">{{ $data['profile-pwd-upd'] }} {{ Auth::user()->password->updated_at }}</p>
                         <footer>
                             <a href="/site/password" class="button small alt2">{{ $data['profile-changepw'] }}</a>
