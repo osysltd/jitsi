@@ -35,7 +35,7 @@ rm -rf /var/www/html/ /etc/nginx/ /etc/prosody/ /var/lib/prosody/ /usr/lib/proso
 ### Optional
 #### Assign permissions
 ```sh
-sudo chown ubuntu:ubuntu -R /etc/prosody/conf.avail/ /etc/jitsi/meet/ /etc/nginx/sites-available/ 
+sudo chown ubuntu:ubuntu -R /etc/prosody/conf.avail/ /etc/jitsi/meet/ /etc/nginx/sites-available/ /etc/nginx/sites-enabled/
 sudo chown ubuntu:ubuntu /usr/lib/prosody/modules/
 ```
 
