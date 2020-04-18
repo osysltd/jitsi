@@ -56,7 +56,7 @@ class Prosody extends Model
     /**
      * Sets the user password.
      *
-     * @return void
+     * @return Prosody
      */
     public static function setUserPassword($user_id)
     {
@@ -66,13 +66,13 @@ class Prosody extends Model
             'host' => env('PROSODY_HOST', app('Illuminate\Http\Request')->getHost()),
             'store' => 'accounts', 'type' => 'string', 'key' => 'password'
         ];
-        self::updateOrCreate($match, ['value' => self::generatePassword(10)]);
+        return self::updateOrCreate($match, ['value' => self::generatePassword(10)]);
     }
 
     /**
      * Sets the room password.
      *
-     * @return void
+     * @return Prosody
      */
     public static function setRoomPassword($user_id, $room_id)
     {
@@ -82,6 +82,6 @@ class Prosody extends Model
             'host' => 'conference.'.env('PROSODY_HOST', app('Illuminate\Http\Request')->getHost()),
             'store' => 'muc_management', 'type' => 'string', 'key' => 'password'
         ];
-        self::updateOrCreate($match, ['value' => self::generatePassword(8)]);
+        return self::updateOrCreate($match, ['value' => self::generatePassword(8)]);
     }
 }
