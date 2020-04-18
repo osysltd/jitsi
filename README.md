@@ -12,7 +12,6 @@ sudo echo deb http://packages.prosody.im/debian $(lsb_release -sc) main | sudo t
 wget https://prosody.im/files/prosody-debian-packages.key -O- | sudo apt-key add -
 sudo apt update
 sudo apt install -y prosody
-prosodyctl about
 ```
 
 ### Jitsi Meet
@@ -36,8 +35,8 @@ rm -rf /var/www/html/ /etc/nginx/ /etc/prosody/ /var/lib/prosody/ /usr/lib/proso
 ### Optional
 #### Assign permissions
 ```sh
-chown ubuntu:ubuntu -R /etc/prosody/conf.avail/ /etc/jitsi/meet/ /etc/nginx/sites-available/ 
-chown ubuntu:ubuntu /usr/lib/prosody/modules/
+sudo chown ubuntu:ubuntu -R /etc/prosody/conf.avail/ /etc/jitsi/meet/ /etc/nginx/sites-available/ 
+sudo chown ubuntu:ubuntu /usr/lib/prosody/modules/
 ```
 
 #### Prepare database
