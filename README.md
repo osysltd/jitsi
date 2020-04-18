@@ -121,6 +121,8 @@ cp /var/www/jitsi/.env.example /var/www/jitsi/.env
 cd /var/www/jitsi/
 composer install
 composer dump-autoload --optimize
+sudo chown -R ubuntu:www-data /var/www/jitsi/
+sudo chmod -R 2775 /var/www/jitsi/
 ```
 
 ### Configuration .env
