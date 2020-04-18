@@ -36,6 +36,7 @@
                             <a href="/site/password" class="button small alt2">{{ $data['profile-changepw'] }}</a>
                         </footer>
                     </section>
+
                     <section class="section-padding">
                         <form method="post" action="/site/profile">
                             <input type="hidden" name="_token" value="{{ Session::token() }}" />
