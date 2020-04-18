@@ -36,7 +36,7 @@
                             {{ $data['event-start'] }}: {{ $event->start }}<br>
                             {{ $data['event-end'] }}: {{ $event->end }}<br>
                             {{ $data['event-cnt'] }}: {{ $event->cnt }}<br>
-                            @if (!$event->price || $tran )
+                            @if (!$event->price || $tran || $event->user_id == Auth::user()->id)
                             <b>{{ $data['event-pwd'] }}: {{ $event->password }}</b><br>
                             <footer>
                                 <a href="/site/signup/{{ $event->id }}" class="button small alt">{{ $data['event-signup'] }}</a>
