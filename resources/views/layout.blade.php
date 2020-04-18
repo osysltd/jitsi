@@ -61,7 +61,7 @@
             <!-- Footer -->
             <div id="footer" class="container">
 
-                <div class="title"><span>{{$data['footer-title']}}</span></div>
+                <div class="title"><span>{{ $data['footer-title'] }}</span></div>
 
                 <div class="row">
 
