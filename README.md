@@ -114,6 +114,14 @@ SESSION_LIFETIME=240
 YANDEX_KEY=<yandex_key>
 YANDEX_SECRET=<yandex_secret>
 YANDEX_REDIRECT_URI=<yandex_redirect_uri>
+
+DB_CONNECTION=mysql
+DB_HOST=<db_host>
+DB_PORT=3306
+DB_DATABASE=<db_name>
+DB_USERNAME=<db_user>
+DB_PASSWORD=<db_password>
+SESSION_DRIVER=database
 ```
 
 ## License
