@@ -29,9 +29,12 @@
                         <header>
                             <h2>{{ $data['p-create-profile'] }}</h2>
                         </header>
-                        <p style="margin-bottom: 0.2em;">{{ $data['profile-login'] }}: {{ Auth::user()->login }}</p>
-                        <p style="margin-bottom: 0.2em;">{{ $data['profile-pwd'] }}: {{ Auth::user()->password->value }}</p>
-                        <p style="margin-bottom: 0.2em;">{{ $data['profile-pwd-upd'] }} {{ Auth::user()->password->updated_at }}</p>
+                        <p style="font-size: smaller;"><b style="color: red;">{{ $data['help-warning'] }}</b> {{ $data['p-create-help'] }}</p>
+                        <ul class="links">
+                            <li>{{ $data['profile-login'] }}: {{ Auth::user()->login }}</li>
+                            <li>{{ $data['profile-pwd'] }}: {{ Auth::user()->password->value }}</li>
+                            <li>{{ $data['profile-pwd-upd'] }} {{ Auth::user()->password->updated_at }}</li>
+                        </ul>
                         <footer>
                             <a href="/site/password" class="button small alt2">{{ $data['profile-changepw'] }}</a>
                         </footer>

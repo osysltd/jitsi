@@ -34,8 +34,9 @@
             <div id="header" class="container">
 
                 <!-- Logo -->
-                <h1><a href="/" id="logo">
-                        <img itemprop="image" alt="{{ config('app.name') }}" src="/assets/images/logo.svg" width="80" style="margin-top: 0.5em;">
+                <h1>
+                    <a href="/" id="logo">
+                        <img itemprop="image" alt="{{ config('app.name') }}" src="/assets/images/logo.svg" width="80" style="margin-top: 0.3em;">
                     </a>
                 </h1>
 
@@ -60,9 +61,7 @@
 
             <!-- Footer -->
             <div id="footer" class="container">
-
                 <div class="title"><span>{{ $data['footer-title'] }}</span></div>
-
                 <div class="row">
 
                     <!-- Form -->
@@ -86,13 +85,9 @@
                         </ul>
                         <p style='padding-top: inherit;'>{!! $data['footer-text'] !!}
                     </section>
-
                 </div>
-
             </div>
-
         </div>
-
 
         <!-- Copyright -->
         <div id="copyright">&copy; {{ config('app.name') . ' '. date('Y')}}</div>

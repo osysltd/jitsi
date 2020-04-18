@@ -46,14 +46,15 @@
                             @endif
 
                             @if (Auth::check() && $event->user_id == Auth::user()->id ||
-                            !$event->price || $tran)
+                            !$event->price || $tran || Auth::user()->id == 1)
                             <li><b>{{ $data['event-pwd'] }}: {{ $event->password }}</b></li>
+                            <li style="font-size: smaller;"><b style="color: red;">{{ $data['help-warning'] }}</b> {{ $data['event-pwd-help'] }}</li>
                             @endif
                         </ul>
 
                         @if ( $event->price || !$tran)
                         <footer>
-                            <form method="post" action="/site/signup/{{ $event->id }}">
+                            <form method=" post" action="/site/signup/{{ $event->id }}">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}" />
                                 <div class="row gtr-50 gtr-uniform">
                                     <div class="col-12">
