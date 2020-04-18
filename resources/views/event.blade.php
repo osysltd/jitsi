@@ -36,7 +36,7 @@
                             <li>{{ $data['profile-pwd-upd'] }} {{ Auth::user()->password->updated_at }}</li>
                         </ul>
                         <footer>
-                            <a href="/site/password" class="button small alt2">{{ $data['profile-changepw'] }}</a>
+                            <a href="/site/password" class="button small alt">{{ $data['profile-changepw'] }}</a>
                         </footer>
                     </section>
 
