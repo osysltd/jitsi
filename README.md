@@ -67,13 +67,13 @@ SHOW TABLES;
 
 ### Install SSL certificate
 ```sh
-/usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh
+sudo /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh
 ```
 
 ### Jitsi Meet configuration
 Following the guide for [Secure Domain](https://github.com/jitsi/jicofo#secure-domain)
 ```sh
-vim /etc/jitsi/meet/<host>-config.js
+sudo vim /etc/jitsi/meet/<host>-config.js
 ```
 ```javascript
 anonymousdomain: 'guest.<host>',
@@ -83,13 +83,13 @@ stunServers: []
 enableWelcomePage: false,
 ```
 ```sh
-vim /etc/jitsi/jicofo/sip-communicator.properties
+sudo vim /etc/jitsi/jicofo/sip-communicator.properties
 org.jitsi.jicofo.auth.URL=XMPP:<host>
 ```
 
 ### Prosody configuration
 ```sh
-vim /etc/prosody/conf.avail/<host>.cfg.lua
+sudo vim /etc/prosody/conf.avail/<host>.cfg.lua
 ```
 
 #### SQL backend Jitsi Meet users
