@@ -40,7 +40,7 @@ class Controller extends BaseController
                 ['ywallet' => 'required|integer|min:20'],
                 ['start' => 'required|date|before:end'],
                 ['end' => 'required|date|after:start'],
-                ['descr' => 'required|string|max:1500'],
+                ['descr' => 'required|string|max:1500']
             );
 
             $room_id = str_replace([':', ' '], '-', $request->start) . '_' . Auth::user()->login;

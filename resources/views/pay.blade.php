@@ -1,5 +1,6 @@
 @extends('layout')
 @section('content')
+
 <!-- Main Wrapper -->
 <div id="main-wrapper">
 
@@ -35,3 +36,4 @@
     </div>
     <!-- Main -->
 </div>
+@endsection

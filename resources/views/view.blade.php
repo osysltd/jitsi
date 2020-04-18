@@ -32,11 +32,10 @@
                 <div id="sidebar" class="col-4 col-12-narrower">
                     <section class="section-padding">
                         <p><b>{{ $data['event-url'] }}: {{ $event->url }}</b><br>
+                            {{ $data['event-server'] }}: {{ env('PROSODY_HOST') }}<br>
                             {{ $data['event-start'] }}: {{ $event->start }}<br>
                             {{ $data['event-end'] }}: {{ $event->end }}<br>
                             {{ $data['event-cnt'] }}: {{ $event->cnt }}<br>
-
-
                             @if (!$event->price || $tran )
                             <b>{{ $data['event-pwd'] }}: {{ $event->password }}</b><br>
                             <footer>
@@ -65,28 +64,18 @@
                         </footer>
                         <hr>
                     </section>
-
                     <section>
                         <header>
                             <h2>{{ $event->user->name }}</h2>
                         </header>
                         <p><img src="{{ $event->user->avatar }}" alt="{{ $event->user->name }}" /></p>
                     </section>
-
-
                     <section>
                         <p>{{ $event->user->text }}</p>
                     </section>
-
-
-
-
-
                 </div>
-
             </div>
         </div>
-
     </div>
-
 </div>
+@endsection
