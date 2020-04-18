@@ -23,6 +23,16 @@ sudo apt update
 sudo apt install -y jitsi-meet lua-dbi-mysql mercurial mc mysql-client-core-5.7
 ```
 
+### Cleanup process
+Just in case you may want to reinstall everything from scratch.
+```sh
+sudo apt remove -y --purge jitsi-meet jitsi-meet-prosody jitsi-videobridge* jicofo jitsi-meet-web jitsi-meet-web-config
+sudo apt remove -y --purge prosody nginx
+sudo apt autoremove -y --purge
+rm -rf /var/www/html/ /etc/nginx/ /etc/prosody/ /var/lib/prosody/ /usr/lib/prosody/ /usr/share/jitsi-meet/
+```
+
+
 ### Optional
 #### Assign permissions
 ```sh
@@ -45,12 +55,6 @@ SHOW TABLES;
 /etc/jitsi/meet/
 /etc/nginx/sites-available/
 /usr/lib/prosody/modules/
-```
-
-### Cleanup process
-```sh
-rm -rf /var/www/html/ /etc/nginx/ /etc/prosody/ /var/lib/prosody /usr/lib/prosody/ /usr/share/jitsi-meet/
-apt remove -y --purge prosody jitsi-meet && apt autoremove -y --purge
 ```
 
 ### Network configuration
@@ -110,10 +114,10 @@ sudo apt install -y php-fpm php-mysql php-mbstring php-xml composer
 ### App deployment
 Create [Personal Access Token](https://github.com/settings/tokens)
 ```sh
-cd /usr/share/nginx/html/
-sudo git clone https://github.com/osysltd/jitsi/
-sudo chown -R ubuntu:ubuntu jitsi/
-cp jitsi/.env.example jitsi/.env
+sudo git clone https://github.com/osysltd/jitsi/ /var/www/jitsi/
+sudo chown -R ubuntu:ubuntu /var/www/jitsi/
+cp /var/www/jitsi/.env.example /var/www/jitsi/.env
+cd /var/www/jitsi/
 composer install
 composer dump-autoload --optimize
 ```
@@ -139,6 +143,13 @@ DB_USERNAME=<db_user>
 DB_PASSWORD=<db_password>
 SESSION_DRIVER=database
 ```
+
+### Nginx configuration
+Upload Nginx configuration for host and enable it
+```sh
+sudo ln -s /etc/nginx/sites-available/www.<host>.conf /etc/nginx/sites-enabled/www.<host>.conf
+```
+
 
 ## License
 The project is not for distribution and commercial use.
