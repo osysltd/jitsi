@@ -33,7 +33,7 @@ class Event extends Model
     public function getPasswordAttribute()
     {
         $match = [
-            'host' => 'conference.' . env('PROSODY_HOST', app('Illuminate\Http\Request')->getHost()),
+          'user' => $this->url, 'host' => 'conference.' . env('PROSODY_HOST', app('Illuminate\Http\Request')->getHost()),
             'store' => 'muc_management', 'type' => 'string', 'key' => 'password'
         ];
         return \App\Prosody::where($match)->firstOrFail()->value;
