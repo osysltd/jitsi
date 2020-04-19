@@ -109,47 +109,47 @@
     <script src='/assets/calendar/list/main.min.js'></script>
     <script src='/assets/calendar/popper.js/popper.min.js'></script>
     <script src='/assets/calendar/tooltip.js/tooltip.min.js'></script>
-</body>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var SITEURL = "{{url('/') . '/site/list'}}";
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': "{{ Session::token() }}"
-            }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var SITEURL = "{{url('/') . '/site/list'}}";
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ Session::token() }}"
+                }
+            });
+            var initialLocaleCode = 'ru';
+
+            var localeSelectorEl = document.getElementById('locale-selector');
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['interaction', 'dayGrid', 'timeGrid', 'list']
+                , header: {
+                    left: 'prev,next today'
+                    , center: 'title'
+                    , right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                }
+                , locale: initialLocaleCode
+                , buttonIcons: false
+                , weekNumbers: false
+                , navLinks: true
+                , editable: false
+                , eventLimit: true
+                , events: SITEURL
+                , eventRender: function(info) {
+                    var tooltip = new Tooltip(info.el, {
+                        title: info.event.extendedProps.description
+                        , placement: 'top'
+                        , trigger: 'hover'
+                        , container: 'body'
+                    });
+                }
+            , });
+
+            calendar.render();
+
         });
-        var initialLocaleCode = 'ru';
 
-        var localeSelectorEl = document.getElementById('locale-selector');
-        var calendarEl = document.getElementById('calendar');
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            plugins: ['interaction', 'dayGrid', 'timeGrid', 'list']
-            , header: {
-                left: 'prev,next today'
-                , center: 'title'
-                , right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-            }
-            , locale: initialLocaleCode
-            , buttonIcons: false
-            , weekNumbers: false
-            , navLinks: true
-            , editable: false
-            , eventLimit: true
-            , events: SITEURL
-            , eventRender: function(info) {
-                var tooltip = new Tooltip(info.el, {
-                    title: info.event.extendedProps.description
-                    , placement: 'top'
-                    , trigger: 'hover'
-                    , container: 'body'
-                });
-            }
-        , });
-
-        calendar.render();
-
-    });
-
-</script>
+    </script>
+</body>
 </html>

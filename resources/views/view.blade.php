@@ -54,14 +54,15 @@
 
                         @if ( $event->price || !$tran)
                         <footer>
-                            <form method=" post" action="/site/signup/{{ $event->id }}">
+                            <form method="post" action="/site/signup/{{ $event->id }}">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}" />
                                 <div class="row gtr-50 gtr-uniform">
                                     <div class="col-12">
                                         <select class="form-control" name="pay_type" id="pay_type">
                                             <option value="any-card-payment-type" selected="selected">{{ $data['pay-card'] }}</option>
                                             <option value="yamoney-payment-type">{{ $data['pay-ya'] }}</option>
-                                        </select> </div>
+                                        </select>
+                                    </div>
                                     <div class="col-12">
                                         <ul class="actions">
                                             <li><button type="submit" class="button alt">{{ $data['event-signup'] }}</button></li>
