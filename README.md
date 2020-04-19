@@ -101,7 +101,7 @@ sudo sed -n 's/^ *JVB_SECRET= *//p' /etc/jitsi/videobridge/config && sudo prosod
 
 ### Restart all services
 ```sh
-sudo /etc/init.d/prosody restart && sudo /etc/init.d/jitsi-videobridge2 restart && sudo /etc/init.d/jicofo restart && sudo /etc/init.d/nginx restart && sudo tail -f -n0 /var/log/prosody/prosody.log
+sudo /etc/init.d/prosody restart && sudo /etc/init.d/jitsi-videobridge2 restart && sudo /etc/init.d/jicofo restart && sudo /etc/init.d/coturn restart && sudo /etc/init.d/nginx restart && sudo tail -f -n0 /var/log/prosody/prosody.log
 ```
 
 ## Lumen Installation
@@ -150,7 +150,13 @@ SESSION_DRIVER=database
 ### Nginx configuration
 Upload Nginx configuration for host and enable it
 ```sh
-sudo ln -s /etc/nginx/sites-available/www.<host>.conf /etc/nginx/sites-enabled/www.<host>.conf
+sudo ln -s /etc/nginx/sites-available/<host>.conf /etc/nginx/sites-enabled/<host>.conf
+```
+
+### Coturn Turn Server configuration
+Adjust path to certificate and key
+```ssh
+sudo vim /etc/turnserver.conf
 ```
 
 
