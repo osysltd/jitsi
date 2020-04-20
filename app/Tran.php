@@ -11,7 +11,7 @@ class Tran extends Model
      *
      * @var array
      */
-    protected $fillable = ['event_id', 'session', 'to', 'amount'];
+    protected $fillable = ['event_id', 'user_id', 'session', 'to', 'amount'];
 
     public function event()
     {

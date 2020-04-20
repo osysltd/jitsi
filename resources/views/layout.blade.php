@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/assets/calendar/flatpickr/ie.css">
     <link rel="stylesheet" href="/assets/calendar/popper.js/popper.css">
 
-    <title>{{ config('app.name') }} - {{ $data['title'] }}</title>
+    <title>{{ config('app.name') }} - {{ $data['site-name'] }}</title>
 </head>
 <body class="{{ isset($bodyclass) ? $bodyclass : 'no-sidebar' }} is-preload">
     <div id="page-wrapper">

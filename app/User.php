@@ -63,7 +63,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     /**
-     * Get all of the user recoeds.
+     * Get all of the user records.
      */
 
     public function prosodys()
@@ -71,7 +71,18 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->hasMany('App\Prosody');
     }
 
+    /**
+     * Get all of the user records.
+     */
 
+    public function trans()
+    {
+        return $this->hasMany('App\Tran');
+    }
+
+    /**
+     * Get user password.
+     */
     public function password()
     {
         $match = [

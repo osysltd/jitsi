@@ -15,6 +15,13 @@
                     </header>
                     <ul class="pennants">
                         <li>
+                            <a href="#" class="pennant"><span class="icon solid fa-ruble-sign"></span></a>
+                            <header>
+                                <h3>{{ $data['fa-ruble-sign-header'] }}</h3>
+                            </header>
+                            <p>{!! $data['fa-ruble-sign'] !!}</p>
+                        </li>
+                        <li>
                             <a href="#" class="pennant"><span class="icon solid fa-mobile"></span></a>
                             <header>
                                 <h3>{{ $data['fa-mobile-header'] }}</h3>
@@ -34,13 +41,6 @@
                                 <h3>{{ $data['fa-photo-video-header'] }}</h3>
                             </header>
                             <p>{!! $data['fa-photo-video'] !!}</p>
-                        </li>
-                        <li>
-                            <a href="#" class="pennant"><span class="icon solid fa-ruble-sign"></span></a>
-                            <header>
-                                <h3>{{ $data['fa-ruble-sign-header'] }}</h3>
-                            </header>
-                            <p>{!! $data['fa-ruble-sign'] !!}</p>
                         </li>
                     </ul>
                     <footer>

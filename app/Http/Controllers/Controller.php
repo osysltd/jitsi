@@ -43,7 +43,7 @@ class Controller extends BaseController
                 ['descr' => 'required|string|max:1500']
             );
 
-            $room_id = str_replace([':', ' '], '-', $request->start) . '_' . Auth::user()->login;
+            $room_id = str_replace([':', ' '], '', $request->start) . '_' . Auth::user()->login;
             $event = \App\Event::updateOrCreate(
                 [
                     'user_id' => Auth::user()->id,

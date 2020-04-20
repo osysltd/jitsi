@@ -45,8 +45,7 @@
                             <li>{{ $data['event-price'] }}: {{ $event->price }}</li>
                             @endif
 
-                            @if (Auth::check() && $event->user_id == Auth::user()->id ||
-                            !$event->price || $tran)
+                            @if (Auth::id() || !$event->price || $tran)
                             <li><b>{{ $data['event-pwd'] }}: {{ $event->password }}</b></li>
                             <li style="font-size: smaller;"><b style="color: red;">{{ $data['help-warning'] }}</b> {{ $data['event-pwd-help'] }}</li>
                             @endif

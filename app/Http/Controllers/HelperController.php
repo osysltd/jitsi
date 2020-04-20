@@ -30,6 +30,7 @@ class HelperController extends BaseController
         if ($hash == md5($event->id .  Session::getId())) {
             \App\Tran::create([
                 'event_id' => $event->id,
+                'user_id' => Auth::id(),
                 'session' => Session::getId(),
                 'to' => $event->ywallet,
                 'amount' => $event->price
