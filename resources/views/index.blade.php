@@ -38,9 +38,9 @@
                         <li>
                             <a href="#" class="pennant"><span class="icon solid fa-ruble-sign"></span></a>
                             <header>
-                                <h3>{{ $data['fa-user-friends-header'] }}</h3>
+                                <h3>{{ $data['fa-ruble-sign-header'] }}</h3>
                             </header>
-                            <p>{!! $data['fa-user-friends'] !!}</p>
+                            <p>{!! $data['fa-ruble-sign'] !!}</p>
                         </li>
                     </ul>
                     <footer>
