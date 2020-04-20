@@ -85,16 +85,14 @@ class HelperController extends BaseController
      */
     public function createRobots()
     {
-        return response('Not found.', 404);
-
-        $site = Site::where('fqdn', config('app.name'))->firstOrFail();
+        $items = \App\Event::where('updated_at', '>=', '2020-01-01')->get();
         header('Content-Type: text/plain');
         echo 'Host: ' . config('app.name') . PHP_EOL;
         echo 'Sitemap: ' . config('app.url') . '/sitemap.xml' . PHP_EOL;
         foreach (array('Yandex', 'Googlebot', 'Mail.Ru', '*') as $bot) {
             echo 'User-agent: ' . $bot . PHP_EOL;
-            foreach ($site->items()->orderBy('pivot_sort')->get(array('url')) as $item) {
-                echo 'Allow: /' . $item->url . PHP_EOL;
+            foreach ($items as $item) {
+                echo 'Allow: /site/event/' . $item->id . PHP_EOL;
             }
             echo 'Allow: /' . PHP_EOL;
             echo 'Disallow: /LICENSE.txt' . PHP_EOL;

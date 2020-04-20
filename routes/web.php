@@ -80,5 +80,6 @@ $router->get('/site/logout', function () use ($router) {
 /**
  * Service routes
  */
+//$router->get('/robots', 'HelperController@createRobots');
 $router->get('/robots.txt', 'HelperController@createRobots');
 $router->get('/sitemap.xml', 'HelperController@createSitemap');
