@@ -36,7 +36,7 @@
                             <p>{!! $data['fa-photo-video'] !!}</p>
                         </li>
                         <li>
-                            <a href="#" class="pennant"><span class="icon solid fa-user-friends"></span></a>
+                            <a href="#" class="pennant"><span class="icon solid fa-ruble-sign"></span></a>
                             <header>
                                 <h3>{{ $data['fa-user-friends-header'] }}</h3>
                             </header>
