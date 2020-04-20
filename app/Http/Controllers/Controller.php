@@ -19,7 +19,7 @@ class Controller extends BaseController
     {
         $tran = null;
         if (Auth::id()) {
-            $tran = Auth::user()->trans->firstWhere('event_id', $id)->get();
+            $tran = Auth::user()->trans->firstWhere('event_id', $id)->first();
         }
         if (!$tran) {
             $match = ['session' => Session::getId(), 'event_id' => $id];
