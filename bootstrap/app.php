@@ -127,6 +127,17 @@ class_alias(Illuminate\Support\Facades\Cookie::class, 'Cookie');
 
 /*
 |--------------------------------------------------------------------------
+| Strings
+|--------------------------------------------------------------------------
+*/
+
+$app->middleware([
+    App\Http\Middleware\ConvertEmptyStringsToNull::class,
+    App\Http\Middleware\TrimStrings::class,
+]);
+
+/*
+|--------------------------------------------------------------------------
 | Register Service Providers
 |--------------------------------------------------------------------------
 |

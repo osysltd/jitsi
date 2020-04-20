@@ -69,7 +69,7 @@
                                 <input maxlength="5" size="5" type="number" name="price" id="price" placeholder="{{ $data['event-price'] }}" required />
                             </div>
                             <div class="col-8 col-12-narrower">
-                                <input maxlength="20" size="20" type="number" name="ywallet" id="ywallet" placeholder="{{ $data['event-ywallet'] }}" />
+                                <input maxlength="20" size="20" type="number" name="ywallet" id="ywallet" placeholder="{{ $data['event-ywallet'] }}" required />
                             </div>
                             <div class="col-6 col-12-narrower">
                                 <input type="date" name="start" id="start" class="date" placeholder="{{ $data['event-start'] }}" required />
@@ -78,7 +78,7 @@
                                 <input type="date" name="end" id="end" class="date" placeholder="{{ $data['event-end'] }}" required />
                             </div>
                             <div class="col-12">
-                                <textarea maxlength="1500" name="descr" id="descr" style="height: 20em;" placeholder="{{ $data['event-descr'] }}" required ></textarea>
+                                <textarea maxlength="1500" name="descr" id="descr" style="height: 20em;" placeholder="{{ $data['event-descr'] }}" required></textarea>
                             </div>
                             <div class="col-12">
                                 <div class="actions">

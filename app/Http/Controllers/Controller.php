@@ -59,8 +59,8 @@ class Controller extends BaseController
             $this->validate(
                 $request,
                 ['title' => 'required|string|max:100'],
-                ['price' => 'required|integer|max:5'],
-                ['ywallet' => 'required|integer|min:20'],
+                ['price' => 'required|integer|min:2'],
+                ['ywallet' => 'required|numeric|digits:20'],
                 ['start' => 'required|date|before:end'],
                 ['end' => 'required|date|after:start'],
                 ['descr' => 'required|string|max:1500']
@@ -68,7 +68,7 @@ class Controller extends BaseController
 
             $room_id = str_replace([':', ' '], '', $request->start) . '_' . Auth::user()->login;
             if ((int) $request->price != 0 && (int) $request->price < 10) {
-                $$request->price = 10;
+                $request->price = 10;
             }
             $event = \App\Event::updateOrCreate(
                 [
