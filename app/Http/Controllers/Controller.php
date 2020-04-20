@@ -66,7 +66,7 @@ class Controller extends BaseController
                 ['descr' => 'required|string|max:1500']
             );
 
-            $room_id = str_replace([':', ' '], '', $request->start) . '_' . Auth::user()->login;
+            $room_id = str_replace([':', ' ', '-'], '', $request->start) . '_' . Auth::user()->login;
             if ((int) $request->price != 0 && (int) $request->price < 10) {
                 $request->price = 10;
             }
