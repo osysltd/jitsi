@@ -80,6 +80,8 @@ class HelperController extends BaseController
 
     /**
      * Render Robots.txt
+     * @see /etc/php/7.2/fpm/php.ini
+     * output_buffering = Off
      *
      * @return Robots.txt
      */
