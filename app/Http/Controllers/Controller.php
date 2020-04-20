@@ -18,8 +18,8 @@ class Controller extends BaseController
     public function viewEvent($id)
     {
         $tran = null;
-        if (Auth::id() && Auth::user()->trans) {
-            $tran = Auth::user()->trans->firstWhere('event_id', $id)->get();
+        if (Auth::id()) {
+            $tran = Auth::user()->trans->firstWhere('event_id', $id);
         }
         if (!$tran) {
             $match = ['session' => Session::getId(), 'event_id' => $id];
