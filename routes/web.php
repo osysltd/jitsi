@@ -27,15 +27,7 @@ $router->get('/', function () use ($router) {
 $router->get('/site/list', 'Controller@listEvents');
 
 // GET: Event information
-$router->get('/site/event/{id}',  function ($id) use ($router) {
-    $match = ['session' => Session::getId(), 'event_id' => $id];
-    return view('view', [
-        'data' => \App\Param::all(),
-        'menu' => \App\Cat::orderBy('sort', 'asc')->get(),
-        'event' => \App\Event::findOrFail($id),
-        'tran' => \App\Tran::where($match)->first(),
-    ]);
-});
+$router->get('/site/event/{id}', 'Controller@viewEvent');
 
 // GET: Event creation and Profile update
 $router->get('/site/event', ['middleware' => 'auth', function () use ($router) {

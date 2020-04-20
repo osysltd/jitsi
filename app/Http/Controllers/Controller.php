@@ -13,6 +13,29 @@ use PHPUnit\Util\Json;
 class Controller extends BaseController
 {
     /**
+     * View the event
+     */
+    public function viewEvent($id)
+    {
+        $tran = null;
+        if (Auth::id()) {
+            $tran = Auth::user()->trans->firstWhere('event_id', $id)->get();
+        }
+        if (!$tran) {
+            $match = ['session' => Session::getId(), 'event_id' => $id];
+            $tran = \App\Tran::where($match)->first();
+        }
+
+        return view('view', [
+            'data' => \App\Param::all(),
+            'menu' => \App\Cat::orderBy('sort', 'asc')->get(),
+            'event' => \App\Event::findOrFail($id),
+            'tran' => $tran
+        ]);
+    }
+
+
+    /**
      * Sign Up for free event
      */
 
@@ -44,6 +67,9 @@ class Controller extends BaseController
             );
 
             $room_id = str_replace([':', ' '], '', $request->start) . '_' . Auth::user()->login;
+            if ((int) $request->price != 0 && (int) $request->price < 10) {
+                $$request->price = 10;
+            }
             $event = \App\Event::updateOrCreate(
                 [
                     'user_id' => Auth::user()->id,
