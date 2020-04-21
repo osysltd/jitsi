@@ -338,10 +338,8 @@ var config = {
 
         // The STUN servers that will be used in the peer to peer connections
         stunServers: [
-
             { urls: 'stun:vidq.ru:443' },
-            { urls: 'stun:i.vidq.ru:443' },
-            { urls: 'stun:i.vidq.ru:4446' },
+            { urls: 'stun:vidq.ru:4446' },
             { urls: 'stun:meet-jit-si-turnrelay.jitsi.net:443' }
         ],
 

@@ -3,16 +3,17 @@ plugin_paths = { "/usr/share/jitsi-meet/prosody-plugins/" }
 -- domain mapper options, must at least have domain base set to use the mapper
 muc_mapper_domain_base = "i.vidq.ru";
 
-turncredentials_secret = "IPsu0OVtfcaUfZg0";
+turncredentials_secret = "SecretPassword";
 
 turncredentials = {
-  { type = "stun", host = "i.vidq.ru", port = "4446" },
-  { type = "turn", host = "i.vidq.ru", port = "4446", transport = "udp" },
-  { type = "turns", host = "i.vidq.ru", port = "443", transport = "tcp" }
+  { type = "stun", host = "vidq.ru", port = "4446" },
+  { type = "turn", host = "vidq.ru", port = "4446", transport = "udp" },
+  { type = "turns", host = "vidq.ru", port = "443", transport = "tcp" }
 };
 
 cross_domain_bosh = false;
 consider_bosh_secure = true;
+
 -- Guest Virtualhost
 VirtualHost "guest.vidq.ru"
         authentication = "anonymous"
@@ -29,7 +30,7 @@ VirtualHost "i.vidq.ru"
             host = "db.vidq.ru", -- The address of the database server (delete this line for Postgres)
             port = 3306, -- For databases connecting over TCP
             username = "admin", -- The username to authenticate to the database
-            password = "Password" -- The password to authenticate to the database
+            password = "SecretPassword" -- The password to authenticate to the database
         }
         -- enabled = false -- Remove this line to enable this host
         -- authentication = "anonymous"
@@ -77,7 +78,7 @@ Component "conference.i.vidq.ru" "muc"
         host = "db.vidq.ru", -- The address of the database server (delete this line for Postgres)
         port = 3306, -- For databases connecting over TCP
         username = "admin", -- The username to authenticate to the database
-        password = "Password" -- The password to authenticate to the database
+        password = "SecretPassword" -- The password to authenticate to the database
     }
     storage = {
         muc_management = "sql"
@@ -123,11 +124,11 @@ VirtualHost "auth.i.vidq.ru"
         host = "db.vidq.ru", -- The address of the database server (delete this line for Postgres)
         port = 3306, -- For databases connecting over TCP
         username = "admin", -- The username to authenticate to the database
-        password = "Password" -- The password to authenticate to the database
+        password = "SecretPassword" -- The password to authenticate to the database
     }
 
 Component "focus.i.vidq.ru"
-    component_secret = "PuVvQd2VmSyNUHG6"
+    component_secret = "SecretPassword"
 
 Component "speakerstats.i.vidq.ru" "speakerstats_component"
     muc_component = "conference.i.vidq.ru"
