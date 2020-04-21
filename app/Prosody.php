@@ -43,7 +43,7 @@ class Prosody extends Model
      */
     private static function generatePassword($length)
     {
-        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ123456789";
+        $alphabet = "abcdefghijkmnopqrstuwxyzABCDEFGHJKLMNOPQRSTUWXYZ123456789";
         $pass = array(); //remember to declare $pass as an array
         $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
         for ($i = 0; $i < (int) $length; $i++) {
