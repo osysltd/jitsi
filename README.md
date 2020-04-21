@@ -65,6 +65,7 @@ SHOW TABLES;
 * 5269/tcp - XMPP federation
 * 5222/tcp - XMPP
 * 4446/tcp/udp - Stun
+* 443/udp - turns
 
 ### Install SSL certificate
 ```sh
