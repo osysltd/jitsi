@@ -89,6 +89,14 @@ sudo vim /etc/jitsi/jicofo/sip-communicator.properties
 org.jitsi.jicofo.auth.URL=XMPP:<host>
 ```
 
+### Coturn configuration
+```sh
+vim /etc/turnserver.conf
+realm=<host>
+cert=/etc/letsencrypt/live/<host>/fullchain.pem
+pkey=/etc/letsencrypt/live/<host>/privkey.pem
+```
+
 ### Prosody configuration
 ```sh
 sudo vim /etc/prosody/conf.avail/<host>.cfg.lua
