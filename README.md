@@ -60,11 +60,11 @@ SHOW TABLES;
 ### Network configuration
 * 80/tcp - frontend
 * 443/tcp - frontend
-* 4443/tcp - videobridge
-* 10000/udp - videobridge
+* 4443/tcp - videobridge (fallback)
+* 10000/udp - videobridge (media)
 * 5269/tcp - XMPP federation
 * 5222/tcp - XMPP
-* 4446/tcp/udp - Stun
+* 4446/tcp/udp - stun
 * 443/udp - turns
 
 ### Install SSL certificate
