@@ -29,7 +29,7 @@ sudo apt remove -y --purge jitsi-meet jitsi-meet-prosody jitsi-videobridge* jico
 sudo apt remove -y --purge nginx*
 sudo apt remove -y --purge prosody
 sudo apt autoremove -y --purge
-rm -rf /var/www/html/ /etc/nginx/ /usr/share/jitsi-meet/ /etc/prosody/ /var/lib/prosody/ /usr/lib/prosody/
+rm -rf /etc/turnserver.conf /var/www/html/ /etc/nginx/ /usr/share/jitsi-meet/ /etc/prosody/ /var/lib/prosody/ /usr/lib/prosody/
 ```
 
 
