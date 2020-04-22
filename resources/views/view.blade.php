@@ -51,7 +51,7 @@
                             @endif
                         </ul>
 
-                        @if ((bool) $event->price || !$tran || Auth::check() && $event->user_id != Auth::id())
+                        @if ((bool) $event->price && (!$tran || Auth::check() && $event->user_id != Auth::id()))
                         <footer>
                             <form method="post" action="/site/signup/{{ $event->id }}">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}" />
