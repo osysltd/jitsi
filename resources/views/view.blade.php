@@ -41,17 +41,17 @@
                             <li>{{ $data['event-end'] }}: {{ $event->end }}</li>
                             <li>{{ $data['event-cnt'] }}: {{ $event->cnt }}</li>
 
-                            @if ($event->price)
+                            @if ((bool) $event->price)
                             <li>{{ $data['event-price'] }}: {{ $event->price }}</li>
                             @endif
 
-                            @if ($event->user_id == Auth::id() || !$event->price || $tran)
+                            @if (!(bool) $event->price || $tran || $event->user_id == Auth::id())
                             <li><b>{{ $data['event-pwd'] }}: {{ $event->password }}</b></li>
                             <li style="font-size: smaller;"><b style="color: red;">{{ $data['help-warning'] }}</b> {{ $data['event-pwd-help'] }}</li>
                             @endif
                         </ul>
 
-                        @if ($event->user_id != Auth::id() || $event->price || !$tran)
+                        @if ((bool) $event->price || !$tran || Auth::check() && $event->user_id != Auth::id())
                         <footer>
                             <form method="post" action="/site/signup/{{ $event->id }}">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}" />
