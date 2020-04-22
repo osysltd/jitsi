@@ -25,7 +25,7 @@
                         </header>
                         <p>{{ $event->descr }}</p>
                     </article>
-                    <a href="https://{{ env('PROSODY_HOST') }}/{{ $event->url }}" class="button small alt2">{{ $data['event-signin'] }}</a>
+                    <a href="https://{{ env('PROSODY_HOST') }}/{{ $event->url }}" class="button small alt">{{ $data['event-signin'] }}</a>
                 </div>
 
                 <!-- Sidebar -->
@@ -51,8 +51,8 @@
                             @endif
                         </ul>
 
-                        @if ((bool) $event->price && (!$tran || Auth::check() && $event->user_id != Auth::id()))
                         <footer>
+                            @if ((bool) $event->price && (!$tran || Auth::check() && $event->user_id != Auth::id()))
                             <form method="post" action="/site/signup/{{ $event->id }}">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}" />
                                 <div class="row gtr-50 gtr-uniform">
@@ -64,13 +64,15 @@
                                     </div>
                                     <div class="col-12">
                                         <ul class="actions">
-                                            <li><button type="submit" class="button alt">{{ $data['event-signup'] }}</button></li>
+                                            <li><button type="submit" class="button alt2">{{ $data['event-signup'] }}</button></li>
                                         </ul>
                                     </div>
                                 </div>
                             </form>
+                            @elseif (!(bool) $event->price)
+                            <a href="/site/signup/{{ $event->id }}" class="button small alt2">{{ $data['event-signup'] }}</a>
+                            @endif
                         </footer>
-                        @endif
                         <hr>
                     </section>
 
