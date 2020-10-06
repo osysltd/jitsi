@@ -4,6 +4,8 @@
 
 [Jitsi Meet](https://github.com/jitsi/jitsi-meet/) is an open-source (Apache) WebRTC JavaScript application that uses [Jitsi Videobridge](https://jitsi.org/videobridge) to provide high quality, [secure](#security) and scalable video conferences.
 
+This is the project which implies all the mentioned above systems and technologies and allows hosts to create web conferences, set payment amount and hosts receive payments from participants for the conferences. It can be applicable for studies, courses and other conferences for which the host wants to receive payments directly.
+
 ## Installation
 
 ### Prosody
