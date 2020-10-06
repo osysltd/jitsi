@@ -4,7 +4,9 @@
 
 [Jitsi Meet](https://github.com/jitsi/jitsi-meet/) is an open-source (Apache) WebRTC JavaScript application that uses [Jitsi Videobridge](https://jitsi.org/videobridge) to provide high quality, [secure](#security) and scalable video conferences.
 
-This is the project which implies all the mentioned above systems and technologies and allows hosts to create web conferences, set payment amount and hosts receive payments from participants for the conferences. It can be applicable for studies, courses and other conferences for which the host wants to receive payments directly.
+[Prosody](https://prosody.im/) is a modern XMPP communication server. It aims to be easy to set up and configure, and efficient with system resources. Additionally, for developers it aims to be easy to extend and give a flexible system on which to rapidly develop added functionality, or prototype new protocols.
+
+This is the project which implies all the mentioned above systems and technologies and allows hosts to create web conferences and meetings, set payment amount and allows hosts to receive payments from participants of the conferences and meetings. It can be applicable for studies, courses and other conferences and meetings for which the host wants to receive payments directly. Payment system is [Yandex Money](https://money.yandex.ru/) but the database schema and code can be adjusted to use any other payment system accordigly.
 
 ## Installation
 
